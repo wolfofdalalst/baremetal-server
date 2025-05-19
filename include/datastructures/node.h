@@ -2,6 +2,7 @@
 #define NODE_H
 
 struct listNode {
+    void* key;
     void *data;
     struct listNode *next;
     struct listNode *prev;
