@@ -1,34 +1,53 @@
-# compiler flags
+# Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude -g
-
-# directories
-SRCDIR = src
+CFLAGS = -Wall -Wextra -g -I$(INCDIR) -I$(INCDIR)/datastructures
 OBJDIR = obj
-BIN = baremetal
+BINDIR = bin
+SRCDIR = src
+INCDIR = include
+TESTDIR = test
 
-SOURCES = $(wildcard $(SRCDIR)/*.c)
-OBJECTS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
+# Source files
+SOURCES := $(shell find $(SRCDIR) -name '*.c')
+OBJECTS := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
 
-# target
-all: $(BIN)
+# Test files
+TESTSOURCES := $(wildcard $(TESTDIR)/*.c)
+TESTOBJECTS := $(patsubst $(TESTDIR)/%.c,$(OBJDIR)/test/%.o,$(TESTSOURCES))
+TESTBIN = $(BINDIR)/test_runner
 
-# build binary
-$(BIN): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^
+# Main binary
+MAINBIN = $(BINDIR)/main
+MAIN_OBJ := $(OBJDIR)/main.o
+TEST_OBJS := $(filter-out $(MAIN_OBJ), $(OBJECTS))
 
-# compile source files to object files
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+# Targets
+all: $(MAINBIN)
 
-# create object directory if it doesn't exist
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
+test: $(TESTBIN)
+	./$(TESTBIN)
 
 clean:
-	rm -rf $(OBJDIR) $(BIN)
+	rm -rf $(OBJDIR) $(BINDIR)
 
-run: $(BIN)
-	./$(BIN)
+# Create bin and obj directories if not present
+$(BINDIR) $(OBJDIR):
+	mkdir -p $@
 
-.PHONY: all clean run
+# Build main binary
+$(MAINBIN): $(OBJECTS) | $(BINDIR)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Build test binary (excluding main.o)
+$(TESTBIN): $(TEST_OBJS) $(TESTOBJECTS) | $(BINDIR)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Compile source files to object files
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Compile test files to object files
+$(OBJDIR)/test/%.o: $(TESTDIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 struct server serverCreate(int domain, int service, int protocol,
-                           u_long interface, int port, int backlog,
+                           unsigned long interface, int port, int backlog,
                            void (*launch)(struct server *srv)) {
     struct server srv;
 

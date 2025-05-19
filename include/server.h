@@ -8,7 +8,7 @@ struct server {
     int domain;
     int service;
     int protocol;
-    u_long interface;
+    unsigned long interface;
     int port;
     int backlog;
 
@@ -20,7 +20,7 @@ struct server {
 };
 
 struct server serverCreate(int domain, int service, int protocol,
-                           u_long interface, int port, int backlog,
+                           unsigned long interface, int port, int backlog,
                            void (*launch)(struct server *srv));
 
 #endif  // SERVER_H
