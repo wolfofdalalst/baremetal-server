@@ -1,12 +1,14 @@
 #include "server.h"
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 struct server serverCreate(int domain, int service, int protocol,
                            unsigned long interface, int port, int backlog,
                            void (*launch)(struct server *srv)) {
     struct server srv;
+    memset(&srv, 0, sizeof(srv));
 
     srv.domain = domain;
     srv.service = service;
@@ -20,23 +22,26 @@ struct server serverCreate(int domain, int service, int protocol,
     srv.address.sin_addr.s_addr = htonl(interface);
 
     srv.socket = socket(domain, service, protocol);
-    if (srv.socket == 0) {
-        perror("Failed to connect to socket...\n");
-        exit(EXIT_FAILURE);
+    if (srv.socket < 0) {
+        perror("Socket creation failed");
+        srv.socket = -1;
+        return srv;
     }
 
-    if ((bind(srv.socket, (struct sockaddr *)&srv.address,
-              sizeof(srv.address))) < 0) {
-        perror("Failed to bind socket...\n");
-        exit(EXIT_FAILURE);
+    if (bind(srv.socket, (struct sockaddr *)&srv.address, sizeof(srv.address)) < 0) {
+        perror("Bind failed");
+        close(srv.socket);
+        srv.socket = -1;
+        return srv;
     }
 
     if (listen(srv.socket, backlog) < 0) {
-        perror("Failed to listen on socket...\n");
-        exit(EXIT_FAILURE);
+        perror("Listen failed");
+        close(srv.socket);
+        srv.socket = -1;
+        return srv;
     }
 
     srv.launch = launch;
-
     return srv;
 }
