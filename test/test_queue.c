@@ -1,46 +1,40 @@
-#include <stdio.h>
 #include <assert.h>
-#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "../include/datastructures/queue.h"
 
 void test_queue() {
-    struct queue q = createQueue();
+    struct queue *q = createQueue();
+    assert(q != NULL);
 
-    // Test push
-    int *val1 = malloc(sizeof(int));
-    int *val2 = malloc(sizeof(int));
-    int *val3 = malloc(sizeof(int));
-    *val1 = 10;
-    *val2 = 20;
-    *val3 = 30;
+    int a = 10, b = 20, c = 30;
+    q->push(q, &a, sizeof(a));
+    q->push(q, &b, sizeof(b));
+    q->push(q, &c, sizeof(c));
 
-    q.push(&q, val1);
-    q.push(&q, val2);
-    q.push(&q, val3);
+    int *topVal = (int *)q->top(q);
+    assert(topVal != NULL);
+    assert(*topVal == 10);
 
-    // Test top
-    assert(*(int *)q.top(&q) == 10);
+    q->pop(q);
+    topVal = (int *)q->top(q);
+    assert(topVal != NULL);
+    assert(*topVal == 20);
 
-    // Test pop
-    int *popped1 = (int *)q.pop(&q);
-    assert(*popped1 == 10);
-    free(popped1);
+    q->pop(q);
+    topVal = (int *)q->top(q);
+    assert(topVal != NULL);
+    assert(*topVal == 30);
 
-    int *popped2 = (int *)q.pop(&q);
-    assert(*popped2 == 20);
-    free(popped2);
+    q->pop(q);
+    topVal = (int *)q->top(q);
+    assert(topVal == NULL);
 
-    // Test top after pops
-    assert(*(int *)q.top(&q) == 30);
+    q->pop(q);
+    assert(q->top(q) == NULL);
 
-    int *popped3 = (int *)q.pop(&q);
-    assert(*popped3 == 30);
-    free(popped3);
-
-    // Test pop on empty queue
-    assert(q.pop(&q) == NULL);
-
-    printf("All queue tests passed!\n");
+    printf("All tests passed!\n");
 }
 
 int main() {

@@ -4,13 +4,13 @@
 #include "linkedlist.h"
 
 struct queue {
-    struct linkedList list;
+    struct linkedList *list;
 
-    void (*push)(struct queue *queue, void *data);
-    void* (*pop)(struct queue *queue);
-    void* (*top)(struct queue *queue);
+    void (*push)(struct queue *queue, void *data, int size);
+    void (*pop)(struct queue *queue);
+    void *(*top)(struct queue *queue);
 };
 
-struct queue createQueue(void);
+struct queue *createQueue(void);
 
-#endif // QUEUE_H
+#endif  // QUEUE_H

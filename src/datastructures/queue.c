@@ -2,35 +2,36 @@
 
 #include <stdlib.h>
 
-void pushQueue(struct queue *queue, void *data);
-void *popQueue(struct queue *queue);
-void *topQueue(struct queue *queue);
+void push(struct queue *queue, void *data, int size);
+void pop(struct queue *queue);
+void *top(struct queue *queue);
 
-struct queue createQueue(void) {
-    struct queue queue;
-    queue.list = createLinkedList();
-    queue.push = &pushQueue;
-    queue.pop = &popQueue;
-    queue.top = &topQueue;
+struct queue *createQueue(void) {
+    struct queue *queue = (struct queue *)malloc(sizeof(struct queue));
+    if (queue == NULL) {
+        return NULL;
+    }
+    queue->list = createLinkedList();
+    queue->push = push;
+    queue->pop = pop;
+    queue->top = top;
     return queue;
 }
 
-void pushQueue(struct queue *queue, void *data) {
-    queue->list.insert(&queue->list, queue->list.size, data);
+void push(struct queue *queue, void *data, int size) {
+    queue->list->insert(queue->list, queue->list->size, data, size);
 }
 
-void *popQueue(struct queue *queue) {
-    if (queue->list.size == 0) {
-        return NULL;
+void pop(struct queue *queue) {
+    if (queue->list->size == 0) {
+        return;
     }
-    void *data = queue->list.get(&queue->list, 0);
-    queue->list.remove(&queue->list, 0);
-    return data;
+    queue->list->remove(queue->list, 0);
 }
 
-void *topQueue(struct queue *queue) {
-    if (queue->list.size == 0) {
+void *top(struct queue *queue) {
+    if (queue->list->size == 0) {
         return NULL;
     }
-    return queue->list.get(&queue->list, 0);
+    return queue->list->get(queue->list, 0);
 }

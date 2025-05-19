@@ -7,11 +7,11 @@ struct linkedList {
     struct listNode *head;
     int size;
 
-    void (*insert)(struct linkedList *list, int index, void *data);
+    void (*insert)(struct linkedList *list, int index, void *data, int size);
     void (*remove)(struct linkedList *list, int index);
-    void* (*get)(struct linkedList *list, int index);
+    void *(*get)(struct linkedList *list, int index);
 };
 
-struct linkedList createLinkedList(void);
+struct linkedList *createLinkedList(void);
 
 #endif  // LINKEDLIST_H

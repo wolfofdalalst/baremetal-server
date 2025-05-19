@@ -1,7 +1,9 @@
-#include <stdio.h>
 #include "httprequest.h"
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
 enum HTTPMethod methodSelect(const char *method) {
     if (strcmp(method, "GET") == 0) {
         return GET;
@@ -42,7 +44,7 @@ struct HTTPRequest HTTPRequestCreate(char *requestString) {
     char *HTTPVersion = strtok(NULL, " ");
     HTTPVersion = strtok(NULL, "/");
     HTTPVersion = strtok(NULL, "/");
-    // request.HTTPVersion = atof(HTTPVersion);
+    request.HTTPVersion = (float)atof(HTTPVersion);
 
     return request;
 }
