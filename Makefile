@@ -11,21 +11,26 @@ TESTDIR = test
 SOURCES := $(shell find $(SRCDIR) -name '*.c')
 OBJECTS := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
 
-# Test files
+# Test files and test binaries
 TESTSOURCES := $(wildcard $(TESTDIR)/*.c)
 TESTOBJECTS := $(patsubst $(TESTDIR)/%.c,$(OBJDIR)/test/%.o,$(TESTSOURCES))
-TESTBIN = $(BINDIR)/test_runner
+TESTBINS := $(patsubst $(TESTDIR)/%.c, $(BINDIR)/test_%, $(TESTSOURCES))
 
 # Main binary
-MAINBIN = $(BINDIR)/main
+BAREMETAL = $(BINDIR)/baremetal
 MAIN_OBJ := $(OBJDIR)/main.o
 TEST_OBJS := $(filter-out $(MAIN_OBJ), $(OBJECTS))
 
 # Targets
-all: $(MAINBIN)
+all: baremetal
 
-test: $(TESTBIN)
-	./$(TESTBIN)
+baremetal: $(BAREMETAL)
+
+test: $(TESTBINS)
+	@for bin in $^; do \
+		echo "Running $$bin..."; \
+		./$$bin || exit 1; \
+	done
 
 clean:
 	rm -rf $(OBJDIR) $(BINDIR)
@@ -35,11 +40,11 @@ $(BINDIR) $(OBJDIR):
 	mkdir -p $@
 
 # Build main binary
-$(MAINBIN): $(OBJECTS) | $(BINDIR)
+$(BAREMETAL): $(OBJECTS) | $(BINDIR)
 	$(CC) $(CFLAGS) -o $@ $^
 
-# Build test binary (excluding main.o)
-$(TESTBIN): $(TEST_OBJS) $(TESTOBJECTS) | $(BINDIR)
+# Build individual test binaries (excluding main.o)
+$(BINDIR)/test_%: $(OBJDIR)/test/%.o $(TEST_OBJS) | $(BINDIR)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Compile source files to object files
@@ -51,3 +56,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(OBJDIR)/test/%.o: $(TESTDIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+# Run a specific test: make test_hello
+test_%: $(BINDIR)/test_%
+	@echo "Running $<..."
+	./$<

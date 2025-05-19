@@ -1,6 +1,5 @@
 # Custom
-baremetal
-test_runner
+bin/
 .vscode
 
 # Prerequisites
