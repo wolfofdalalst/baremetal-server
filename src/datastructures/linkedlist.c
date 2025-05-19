@@ -3,17 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct listNode *createNode(void *data);
+void destroyNode(struct listNode *node);
 
-struct nodeInt *createNodeInt(int value);
-void destroyNodeInt(struct nodeInt *node);
+struct listNode *iterate(struct linkedList *list, int index);
+void insertNode(struct linkedList *list, int index, void *data);
+void removeNode(struct linkedList *list, int index);
+void* getNode(struct linkedList *list, int index);
 
-struct nodeInt *iterate(struct linkedListInt *list, int index);
-void insertNode(struct linkedListInt *list, int index, int value);
-void removeNode(struct linkedListInt *list, int index);
-int getNode(struct linkedListInt *list, int index);
-
-struct linkedListInt createLinkedList(void) {
-    struct linkedListInt list;
+struct linkedList createLinkedList(void) {
+    struct linkedList list;
     list.head = NULL;
     list.size = 0;
     list.insert = insertNode;
@@ -22,44 +21,44 @@ struct linkedListInt createLinkedList(void) {
     return list;
 }
 
-struct nodeInt *createNodeInt(int value) {
-    struct nodeInt *node = (struct nodeInt *)malloc(sizeof(struct nodeInt));
+struct listNode *createNode(void *data) {
+    struct listNode *node = (struct listNode *)malloc(sizeof(struct listNode));
     if (node == NULL) {
         perror("Failed to allocate memory for node");
         exit(EXIT_FAILURE);
     }
-    node->value = value;
+    node->data = data;
     node->next = NULL;
     return node;
 }
 
-void destroyNodeInt(struct nodeInt *node) {
+void destroyNode(struct listNode *node) {
     if (node != NULL) {
         free(node);
     }
 }
 
-struct nodeInt *iterate(struct linkedListInt *list, int index) {
-    struct nodeInt *current = list->head;
+struct listNode *iterate(struct linkedList *list, int index) {
+    struct listNode *current = list->head;
     for (int i = 0; i < index && current != NULL; i++) {
         current = current->next;
     }
     return current;
 }
 
-void insertNode(struct linkedListInt *list, int index, int value) {
+void insertNode(struct linkedList *list, int index, void *data) {
     if (index < 0 || index > list->size) {
         perror("Index out of bounds");
         exit(EXIT_FAILURE);
     }
 
-    struct nodeInt *newNode = createNodeInt(value);
+    struct listNode *newNode = createNode(data);
 
     if (index == 0) {
         newNode->next = list->head;
         list->head = newNode;
     } else {
-        struct nodeInt *prevNode = iterate(list, index - 1);
+        struct listNode *prevNode = iterate(list, index - 1);
         newNode->next = prevNode->next;
         prevNode->next = newNode;
     }
@@ -67,33 +66,33 @@ void insertNode(struct linkedListInt *list, int index, int value) {
     list->size++;
 }
 
-void removeNode(struct linkedListInt *list, int index) {
+void removeNode(struct linkedList *list, int index) {
     if (index < 0 || index >= list->size) {
         perror("Index out of bounds");
         exit(EXIT_FAILURE);
     }
 
-    struct nodeInt *nodeToRemove;
+    struct listNode *nodeToRemove;
 
     if (index == 0) {
         nodeToRemove = list->head;
         list->head = list->head->next;
     } else {
-        struct nodeInt *prevNode = iterate(list, index - 1);
+        struct listNode *prevNode = iterate(list, index - 1);
         nodeToRemove = prevNode->next;
         prevNode->next = nodeToRemove->next;
     }
 
-    destroyNodeInt(nodeToRemove);
+    destroyNode(nodeToRemove);
     list->size--;
 }
 
-int getNode(struct linkedListInt *list, int index) {
+void* getNode(struct linkedList *list, int index) {
     if (index < 0 || index >= list->size) {
         perror("Index out of bounds");
         exit(EXIT_FAILURE);
     }
 
-    struct nodeInt *node = iterate(list, index);
-    return node->value;
+    struct listNode *node = iterate(list, index);
+    return node->data;
 }

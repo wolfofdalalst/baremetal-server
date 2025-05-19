@@ -1,17 +1,17 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include <node.h>
+#include "node.h"
 
-struct linkedListInt {
-    struct nodeInt *head;
+struct linkedList {
+    struct listNode *head;
     int size;
 
-    void (*insert)(struct linkedListInt *list, int index, int value);
-    void (*remove)(struct linkedListInt *list, int index);
-    int (*get)(struct linkedListInt *list, int index);
+    void (*insert)(struct linkedList *list, int index, void *data);
+    void (*remove)(struct linkedList *list, int index);
+    void* (*get)(struct linkedList *list, int index);
 };
 
-struct linkedListInt createLinkedList(void);
+struct linkedList createLinkedList(void);
 
 #endif  // LINKEDLIST_H
