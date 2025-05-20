@@ -12,5 +12,6 @@ struct queue {
 };
 
 struct queue *createQueue(void);
+void destroyQueue(struct queue *queue);
 
 #endif  // QUEUE_H

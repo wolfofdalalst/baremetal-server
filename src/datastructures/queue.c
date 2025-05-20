@@ -18,6 +18,15 @@ struct queue *createQueue(void) {
     return queue;
 }
 
+void destroyQueue(struct queue *queue) {
+    if (queue) {
+        if (queue->list) {
+            free(queue->list);
+        }
+        free(queue);
+    }
+}
+
 void push(struct queue *queue, void *data, int size) {
     queue->list->insert(queue->list, queue->list->size, data, size);
 }

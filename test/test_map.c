@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "../include/datastructures/map.h"
 
-int stringCompare(void *a, void *b) {
+static int stringCompare(void *a, void *b) {
     return strcmp((char *)a, (char *)b);
 }
 
