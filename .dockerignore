@@ -1,0 +1,13 @@
+bin/
+obj/
+.git
+.gitignore
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Dockerfile
+docker-compose.yml
+.dockerignore

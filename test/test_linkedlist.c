@@ -5,10 +5,10 @@
 
 #include "../include/datastructures/linkedlist.h"
 
+// Tests linked list functionality
 void test_linkedlist() {
     struct linkedList *list = createLinkedList();
 
-    // Test insert
     int *val1 = malloc(sizeof(int));
     int *val2 = malloc(sizeof(int));
     int *val3 = malloc(sizeof(int));
@@ -25,20 +25,16 @@ void test_linkedlist() {
     assert(*(int *)list->get(list, 1) == 15);
     assert(*(int *)list->get(list, 2) == 20);
 
-    // Test remove
     list->remove(list, 1);
     assert(list->size == 2);
     assert(*(int *)list->get(list, 0) == 10);
     assert(*(int *)list->get(list, 1) == 20);
 
-    // Test edge cases
     list->remove(list, 0);
     list->remove(list, 0);
     assert(list->size == 0);
 
     printf("All linked list tests passed!\n");
-
-    // Free test data
     free(val1);
     free(val2);
     free(val3);

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAREMETAL-SERVER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.4;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 4px solid #ffffff;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 40px 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
+            text-transform: uppercase;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .nav {
+            margin: 40px 0;
+            border: 2px solid #ffffff;
+            padding: 20px;
+        }
+        
+        .nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 40px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .nav a:hover {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 5px 10px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-box {
+            border: 2px solid #ffffff;
+            padding: 30px;
+            background-color: #111111;
+        }
+        
+        .feature-box h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333333;
+            font-size: 1.1rem;
+        }
+        
+        li:before {
+            content: "▶ ";
+            font-weight: bold;
+        }
+        
+        .status-bar {
+            border: 2px solid #ffffff;
+            padding: 20px;
+            margin: 40px 0;
+            background-color: #111111;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .status-item {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .highlight {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 2px 8px;
+            font-weight: bold;
+        }
+        
+        .architecture {
+            background-color: #111111;
+            border: 2px solid #ffffff;
+            padding: 30px;
+            margin: 40px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        .intro {
+            font-size: 1.3rem;
+            margin: 30px 0;
+            padding: 30px;
+            border-left: 4px solid #ffffff;
+            background-color: #111111;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BAREMETAL-SERVER</h1>
+        
+        <div class="nav">
+            <a href="/">HOME</a>
+            <a href="/about.html">ABOUT</a>
+            <a href="https://github.com/wolfofdalalst/baremetal-server" target="_blank">GITHUB</a>
+        </div>
+        
+        <div class="intro">
+            <p>A LIGHTWEIGHT HTTP/1.1 SERVER IMPLEMENTATION WRITTEN IN C FROM SCRATCH, FEATURING CUSTOM DATA STRUCTURES AND MINIMAL DEPENDENCIES.</p>
+        </div>
+        
+        <h2>FEATURES</h2>
+        <p>A professional HTTP server implementation built with systems programming fundamentals and clean architecture principles.</p>
+        
+        <div class="status-bar">
+            <div class="status-item">STATUS: <span class="highlight">ONLINE</span></div>
+            <div class="status-item">PORT: <span class="highlight">8080</span></div>
+            <div class="status-item">PROTOCOL: <span class="highlight">HTTP/1.1</span></div>
+            <div class="status-item">LANGUAGE: <span class="highlight">C</span></div>
+        </div>
+        
+        <h2>KEY FEATURES</h2>
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h3>CORE SERVER</h3>
+                <ul>
+                    <li>HTTP/1.1 Protocol Support</li>
+                    <li>Static File Serving</li>
+                    <li>MIME Type Detection</li>
+                    <li>Error Handling</li>
+                    <li>Modular Architecture</li>
+                </ul>
+            </div>
+            
+            <div class="feature-box">
+                <h3>DATA STRUCTURES</h3>
+                <ul>
+                    <li>Hash Map Implementation</li>
+                    <li>Binary Search Tree</li>
+                    <li>Queue and Linked List</li>
+                    <li>Memory Management</li>
+                    <li>Efficient Operations</li>
+                </ul>
+            </div>
+            
+            <div class="feature-box">
+                <h3>DEVELOPMENT</h3>
+                <ul>
+                    <li>Clean C Codebase</li>
+                    <li>Build Automation</li>
+                    <li>Unit Testing</li>
+                    <li>Docker Support</li>
+                    <li>Documentation</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2>SYSTEM ARCHITECTURE</h2>
+        <div class="architecture">src/
+├── main.c              # Server entry point
+├── server.c            # Socket management  
+├── httprequest.c       # HTTP protocol
+├── fileutils.c         # File operations
+└── datastructures/     # Custom data structures
+
+include/               # Header files
+www/                   # Static web content
+test/                  # Unit tests</div>
+        
+        <h2>QUICK START</h2>
+        <div class="feature-box">
+            <h3>BUILD AND RUN</h3>
+            <div style="font-family: 'Courier New', monospace; background-color: #000000; padding: 20px; margin: 20px 0; border: 1px solid #ffffff;">
+                <div>$ make clean && make</div>
+                <div>$ ./bin/baremetal</div>
+                <div>$ curl http://localhost:8080</div>
+            </div>
+            <h3>DOCKER</h3>
+            <div style="font-family: 'Courier New', monospace; background-color: #000000; padding: 20px; margin: 20px 0; border: 1px solid #ffffff;">
+                <div>$ docker build -t baremetal-server .</div>
+                <div>$ docker run --rm --network host baremetal-server</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

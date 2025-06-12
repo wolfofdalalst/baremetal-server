@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Creates new list node with copied data
 struct listNode *listNodeCreate(void *data, int size) {
     struct listNode *node = malloc(sizeof(struct listNode));
     if (node == NULL) {
@@ -21,6 +22,7 @@ struct listNode *listNodeCreate(void *data, int size) {
     return node;
 }
 
+// Destroys node and frees allocated memory
 void listNodeDestroy(struct listNode *node) {
     if (node != NULL) {
         free(node->data);

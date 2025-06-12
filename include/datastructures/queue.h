@@ -11,7 +11,10 @@ struct queue {
     void *(*top)(struct queue *queue);
 };
 
+// Creates new queue with linked list backend
 struct queue *createQueue(void);
+
+// Destroys queue and frees memory
 void destroyQueue(struct queue *queue);
 
 #endif  // QUEUE_H

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 NOT FOUND - BAREMETAL-SERVER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.4;
+            font-size: 16px;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            letter-spacing: -4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 4px solid #ffffff;
+            padding-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .error-message {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .error-description {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            padding: 30px;
+            border: 2px solid #ffffff;
+            background-color: #111111;
+        }
+        
+        .nav {
+            margin: 40px 0;
+            border: 2px solid #ffffff;
+            padding: 20px;
+        }
+        
+        .nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 0 20px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid #ffffff;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        .ascii-art {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin: 30px 0;
+            white-space: pre;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 20px;
+            background-color: #111111;
+        }
+        
+        .status-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #ffffff;
+            background-color: #111111;
+        }
+        
+        .status-item {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .highlight {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 2px 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <div class="error-message">PAGE NOT FOUND</div>
+        
+        <div class="error-description">
+            THE REQUESTED RESOURCE COULD NOT BE LOCATED ON THIS BAREMETAL SERVER.
+            <br><br>
+            THE URL YOU REQUESTED EITHER DOES NOT EXIST OR HAS BEEN MOVED TO ANOTHER LOCATION.
+        </div>
+        
+        <div class="ascii-art">    ⚠️  ERROR DETECTED  ⚠️
+┌────────────────────────┐
+│   RESOURCE NOT FOUND   │
+│   CHECK YOUR REQUEST   │
+│   AND TRY AGAIN        │
+└────────────────────────┘</div>
+        
+        <div class="status-info">
+            <div class="status-item">STATUS: <span class="highlight">404</span></div>
+            <div class="status-item">ERROR: <span class="highlight">NOT FOUND</span></div>
+            <div class="status-item">SERVER: <span class="highlight">BAREMETAL</span></div>
+        </div>
+        
+        <div class="nav">
+            <a href="/">RETURN HOME</a>
+            <a href="/about.html">ABOUT</a>
+            <a href="https://github.com/wolfofdalalst/baremetal-server" target="_blank">GITHUB</a>
+        </div>
+    </div>
+</body>
+</html>

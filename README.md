@@ -1,75 +1,75 @@
-# baremetal-server
+# Baremetal Server
 
-## Overview
+A lightweight HTTP/1.1 server implementation written in C from scratch, featuring custom data structures and minimal dependencies.
 
-The **baremetal-server** is a minimalist HTTP server implemented entirely from scratch in C. It avoids external libraries and frameworks, emphasizing low-level control and deep understanding of systems programming. Alongside the server, several core data structures like hash maps, queues, and binary search trees (BST) have also been implemented from scratch.
+## Features
 
-This project was developed as a systems-level learning experience, with gathering experience in network programming.
+- **HTTP/1.1 Protocol Support** - Complete request parsing and response handling
+- **Static File Serving** - MIME type detection and file delivery
+- **Custom Data Structures** - Hash maps, binary search trees, queues, and linked lists
+- **Error Handling** - Custom 404 pages and graceful error responses
+- **Modular Architecture** - Clean separation of concerns and reusable components
 
----
-
-## Key Features
-
-- Basic HTTP request parsing (method, URI, version, headers, body)
-- Custom data structures in C:
-  - Hash map with string keys
-  - Binary Search Tree (BST)
-  - Queue and Linked List
-- Modular C codebase with clear abstractions
-- Custom Makefile to manage compilation, testing, and execution
-- Fully open-source under the MIT License
-
----
-
-## Build and Run Instructions
+## Quick Start
 
 ### Prerequisites
 
 - GCC or compatible C compiler
-- Unix-like OS (Linux/macOS preferred)
-- `make` utility
+- Unix-like system (Linux/macOS)
+- Make utility
+- docker (optional, but recommended)
 
-### Commands
-
-Compile all necessary object files and binaries:
+### Baremetal installation
 
 ```bash
-make all
-make run
-make test
+make clean && make
+./bin/baremetal
 ```
----
 
-## Learning Outcomes
+The server will start on port 8080. Access it at `http://localhost:8080`.
 
-This project helped reinforce and apply several core computer science and software engineering principles:
+### Docker 
 
-- Operating systems fundamentals (memory management, process lifecycle)
-- Low-level programming in C with manual memory and string handling
-- TCP/IP and socket programming basics
-- Modular system and low-level design practices
-- Custom implementation of commonly used data structures
-- Build automation using Makefile
+```bash
+docker build -t baremetal-server .
+docker run --rm --network host baremetal-server
+```
 
-### References and Learning Resources
+## Architecture
 
-The development of this project was supported by the following high-quality educational resources:
-- YouTube Channel: [EOM O Meehan](https://www.youtube.com/@eom-dev)
-- Article: [Beej’s Guide to Network Programming](https://beej.us/guide/bgnet/html/split/index.html)
+### Core Components
 
-### TODO
+- **Socket Layer** (`server.c`) - Socket creation, binding, and connection handling
+- **HTTP Parser** (`httprequest.c`) - HTTP request parsing and validation
+- **File Handler** (`fileutils.c`) - Static file serving and MIME type detection
+- **Request Router** (`main.c`) - Request routing and response generation
 
-Future enhancements planned:
+### Data Structures
 
-1. Dockerize the server for easier deployment and testing
-2. Add support for custom route registration and handler callbacks
+- **Hash Map** - String-based key-value storage for HTTP headers
+- **Binary Search Tree** - Efficient data organization and retrieval
+- **Linked List** - Dynamic data storage and manipulation
+- **Queue** - FIFO operations for request processing
 
----
+### Directory Structure
 
-## Contribution Guidelines
+```
+src/                   # Source code
+├── main.c             # Server entry point
+├── server.c           # Socket management
+├── httprequest.c      # HTTP protocol
+├── fileutils.c        # File operations
+└── datastructures/    # Custom data structures
 
-Contributions are welcome. Please fork the repository and submit a pull request. Feature suggestions, bug reports, and design improvements are encouraged.
+include/               # Header files
+www/                   # Static web content
+test/                  # Unit tests
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit pull requests, report bugs, or suggest new features.
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more information.
+This project is licensed under the MIT License. See `LICENSE` for details.

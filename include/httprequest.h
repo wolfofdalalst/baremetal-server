@@ -23,7 +23,10 @@ struct HTTPRequest {
     struct map *bodyFields;
 };
 
+// Creates HTTPRequest structure from raw request string
 struct HTTPRequest HTTPRequestCreate(char *requestString);
+
+// Destroys HTTPRequest and frees all allocated memory
 void HTTPRequestDestroy(struct HTTPRequest *request);
 
 #endif  // HTTPREQUEST_H

@@ -4,6 +4,7 @@
 
 #include "../include/datastructures/queue.h"
 
+// Tests queue functionality
 void test_queue() {
     struct queue *q = createQueue();
     assert(q != NULL);

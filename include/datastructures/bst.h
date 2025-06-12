@@ -11,8 +11,10 @@ struct binarySearchTree {
     void (*remove)(struct binarySearchTree *tree, void *data);
 };
 
-struct binarySearchTree *createBinarySearchTree(int (*compare)(void *a,
-                                                               void *b));
+// Creates new binary search tree with comparison function
+struct binarySearchTree *createBinarySearchTree(int (*compare)(void *a, void *b));
+
+// Destroys BST and frees all allocated memory
 void destroyBinarySearchTree(struct binarySearchTree *tree);
 
 #endif  // BST_H

@@ -12,6 +12,7 @@ struct linkedList {
     void *(*get)(struct linkedList *list, int index);
 };
 
+// Creates new linked list with initialized function pointers
 struct linkedList *createLinkedList(void);
 
 #endif  // LINKEDLIST_H
